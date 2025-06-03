@@ -35,19 +35,19 @@ app.register_blueprint(admin_bp, url_prefix='/api/admin')
 # Configuração do banco de dados - adaptado para PostgreSQL
 DATABASE_URL = os.getenv('DATABASE_URL')
 if DATABASE_URL:
-    # Garante compatibilidade com Render e SQLAlchemy
     if DATABASE_URL.startswith('postgres://'):
         DATABASE_URL = DATABASE_URL.replace('postgres://', 'postgresql://', 1)
     app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 else:
-    # Fallback apenas se DATABASE_URL estiver ausente
+    # Fallback local
     db_user = os.getenv('DB_USERNAME', 'postgres')
     db_password = os.getenv('DB_PASSWORD', 'password')
     db_host = os.getenv('DB_HOST', 'localhost')
     db_port = os.getenv('DB_PORT', '5432')
     db_name = os.getenv('DB_NAME', 'ia_cursos')
-    
+
     app.config['SQLALCHEMY_DATABASE_URI'] = f"postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}"
+
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
