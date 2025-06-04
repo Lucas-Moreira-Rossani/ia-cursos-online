@@ -34,24 +34,24 @@ A plataforma oferece:
 ```
 src/
 ├── models/         # Modelos de dados
-│   ├── user.js     # Modelo de usuário
-│   ├── course.js   # Modelo de curso
-│   └── payment.js  # Modelo de pagamento
+│   ├── user.py     # Modelo de usuário
+│   ├── course.py   # Modelo de curso
+│   └── payment.py  # Modelo de pagamento
 ├── routes/         # Rotas da API
-│   ├── auth.js     # Autenticação
-│   ├── course.js   # Cursos
-│   ├── payment.js  # Pagamentos
-│   ├── content.js  # Conteúdo
-│   └── admin.js    # Painel administrativo
+│   ├── auth.py     # Autenticação
+│   ├── course.py   # Cursos
+│   ├── payment.py  # Pagamentos
+│   ├── content.py  # Conteúdo
+│   └── admin.py    # Painel administrativo
 ├── static/         # Arquivos estáticos
-└── main.js         # Ponto de entrada da aplicação
+└── main.py         # Ponto de entrada da aplicação Flask
 ```
 
 ## Desenvolvimento Local
 
 1. Instale as dependências:
    ```bash
-   npm install
+   pip install -r requirements.txt
    ```
 
 2. Inicie o servidor de desenvolvimento:

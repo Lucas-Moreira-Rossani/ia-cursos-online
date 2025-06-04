@@ -4,8 +4,8 @@
   "description": "Plataforma de Cursos de Inteligência Artificial",
   "type": "module",
   "scripts": {
-    "dev": "node src/main.js",
-    "start": "node src/main.js"
+    "dev": "FLASK_APP=src.main flask run",
+    "start": "FLASK_APP=src.main flask run"
   },
   "dependencies": {
     "express": "^4.18.2",
