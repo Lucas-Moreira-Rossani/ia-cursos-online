@@ -8,76 +8,56 @@ A plataforma oferece:
 - Sistema de autenticação e perfis de usuário
 - Catálogo de cursos com filtros e avaliações
 - Área do aluno com progresso e certificados
-- Sistema de pagamento integrado (Stripe e PagSeguro)
+- Sistema de pagamento integrado (Stripe)
 - Painel administrativo para controle de cursos, usuários e vendas
 - Conteúdo didático para 6 cursos completos sobre IA
 
-## Deploy no Render
+## Deploy no Netlify
 
 ### Passo 1: Conectar este repositório
 
-1. Faça login na sua conta do [Render](https://dashboard.render.com/)
-2. Clique em "New +" e selecione "Web Service"
-3. Escolha "Connect a repository"
-4. Selecione este repositório e clique em "Connect"
+1. Faça login na sua conta do [Netlify](https://app.netlify.com/)
+2. Clique em "Add new site" e selecione "Import an existing project"
+3. Escolha "Deploy with GitHub"
+4. Selecione este repositório e clique em "Deploy site"
 
-### Passo 2: Configurar o Web Service
+### Passo 2: Configurar Variáveis de Ambiente
 
-Configure o serviço com os seguintes parâmetros:
-- **Nome**: ia-cursos-online (ou outro nome de sua preferência)
-- **Runtime**: Python
-- **Build Command**: `pip install -r requirements.txt`
-- **Start Command**: `gunicorn src.wsgi:app`
-- **Plano**: Free (ou outro de sua preferência)
-
-### Passo 3: Criar o Banco de Dados PostgreSQL
-
-1. No dashboard do Render, clique em "New +" e selecione "PostgreSQL"
-2. Configure seu banco de dados:
-   - **Nome**: ia-cursos-db (ou outro nome de sua preferência)
-   - **Plano**: Free
-
-### Passo 4: Configurar Variáveis de Ambiente
-
-1. No seu Web Service, vá para a aba "Environment"
+1. No seu site Netlify, vá para Site settings > Environment variables
 2. Adicione as seguintes variáveis:
-   - `SECRET_KEY`: uma string aleatória e segura (ex: `python -c "import secrets; print(secrets.token_hex(16))"`)
-   - `DATABASE_URL`: use a Internal Database URL do seu PostgreSQL (disponível na página do seu banco de dados)
-   - `FLASK_ENV`: production
-
-### Passo 5: Inicializar o Banco de Dados
-
-Após o primeiro deploy, acesse o shell do seu serviço:
-1. Vá para a aba "Shell" do seu Web Service
-2. Execute os seguintes comandos:
-   ```
-   flask --app src.migrations db init
-   flask --app src.migrations db migrate -m "Migração inicial"
-   flask --app src.migrations db upgrade
-   ```
-
-### Passo 6: Acessar o Site
-
-Após o deploy, seu site estará disponível em:
-- `https://seu-servico.onrender.com`
+   - `SUPABASE_URL`: URL do seu projeto Supabase
+   - `SUPABASE_ANON_KEY`: Chave anônima do seu projeto Supabase
+   - `JWT_SECRET`: Uma string aleatória e segura para tokens JWT
 
 ## Estrutura do Projeto
 
 ```
 src/
 ├── models/         # Modelos de dados
-│   ├── user.py     # Modelo de usuário
-│   ├── course.py   # Modelo de curso
-│   └── payment.py  # Modelo de pagamento
+│   ├── user.js     # Modelo de usuário
+│   ├── course.js   # Modelo de curso
+│   └── payment.js  # Modelo de pagamento
 ├── routes/         # Rotas da API
-│   ├── auth.py     # Autenticação
-│   ├── course.py   # Cursos
-│   ├── payment.py  # Pagamentos
-│   ├── content.py  # Conteúdo
-│   └── admin.py    # Painel administrativo
+│   ├── auth.js     # Autenticação
+│   ├── course.js   # Cursos
+│   ├── payment.js  # Pagamentos
+│   ├── content.js  # Conteúdo
+│   └── admin.js    # Painel administrativo
 ├── static/         # Arquivos estáticos
-└── main.py         # Ponto de entrada da aplicação
+└── main.js         # Ponto de entrada da aplicação
 ```
+
+## Desenvolvimento Local
+
+1. Instale as dependências:
+   ```bash
+   npm install
+   ```
+
+2. Inicie o servidor de desenvolvimento:
+   ```bash
+   npm run dev
+   ```
 
 ## Customização
 
