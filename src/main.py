@@ -52,9 +52,7 @@ else:
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 
-# Criar tabelas do banco de dados
-with app.app_context():
-    db.create_all()
+
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
